@@ -1,0 +1,48 @@
+From 6a6cdaf567a6101dbc500d2ca9e4c4cadc5b808c Mon Sep 17 00:00:00 2001
+From: anuvarsh <anuvarshini.bc@intel.com>
+Date: Fri, 16 Aug 2019 12:04:08 +0530
+Subject: [PATCH] cpu-ref Android.bp
+
+Tracked-On:
+Signed-off-by: anuvarsh <anuvarshini.bc@intel.com>
+---
+ cpu_ref/Android.bp | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/cpu_ref/Android.bp b/cpu_ref/Android.bp
+index e929a9c4..2d91fe9a 100644
+--- a/cpu_ref/Android.bp
++++ b/cpu_ref/Android.bp
+@@ -77,12 +77,20 @@ cc_library_shared {
+                 cflags: ["-DARCH_X86_HAVE_SSSE3"],
+                 srcs: ["rsCpuIntrinsics_x86.cpp"],
+             },
++	    avx2: {
++                cflags: ["-mfma","-mavx2"],
++                srcs: ["rsCpuIntrinsics_x86.cpp"],
++            },
+         },
+         x86_64: {
+             ssse3: {
+                 cflags: ["-DARCH_X86_HAVE_SSSE3"],
+                 srcs: ["rsCpuIntrinsics_x86.cpp"],
+             },
++	    avx2: {
++                cflags: ["-mfma","-mavx2"],
++                srcs: ["rsCpuIntrinsics_x86.cpp"],
++            },
+         },
+     },
+ 
+@@ -118,6 +126,8 @@ cc_library_shared {
+         "-Wextra",
+         "-Wno-unused-parameter",
+         "-Wno-unused-variable",
++	"-mfma",
++	"-mavx2",
+     ],
+ 
+     product_variables: {
+-- 
+2.21.0
+
