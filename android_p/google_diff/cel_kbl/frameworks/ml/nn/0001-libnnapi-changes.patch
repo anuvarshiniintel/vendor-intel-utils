@@ -1,0 +1,41 @@
+From fa75b6a28ac5d06b3e71cc814bd78509fc9ffce7 Mon Sep 17 00:00:00 2001
+From: anuvarsh <anuvarshini.bc@intel.com>
+Date: Thu, 12 Sep 2019 13:34:56 +0530
+Subject: [PATCH] libnnapi changes
+
+Tracked-On:
+Signed-off-by: anuvarsh <anuvarshini.bc@intel.com>
+---
+ nn/Android.bp | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/nn/Android.bp b/nn/Android.bp
+index 1b04d7d8..97c834f5 100644
+--- a/nn/Android.bp
++++ b/nn/Android.bp
+@@ -21,8 +21,21 @@ cc_defaults {
+         "-Wextra",
+         "-Werror",
+         "-O3",
+-	"-march=haswell",
+     ],
++
++    arch: {
++        x86: {
++            avx2: {
++                cflags: ["-mavx","-mavx2","-mfma"],
++            },
++        },
++        x86_64: {
++            avx2: {
++                cflags: ["-mavx","-mavx2","-mfma"],
++            },
++        },
++    },
++
+     product_variables: {
+         debuggable: {  // eng and userdebug builds
+             cflags: ["-DNN_DEBUGGABLE"],
+-- 
+2.23.0
+
